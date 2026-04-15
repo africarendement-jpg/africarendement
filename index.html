@@ -1271,11 +1271,11 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
   <p class="section-sub" id="inv-section-sub">Créez votre compte gratuit en 30 secondes ou connectez-vous pour accéder aux engins disponibles, au simulateur de rendement et à votre espace personnel.</p>
 
   <style>
-    .inv-auth-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2rem}
-    .inv-auth-tab{padding:0.9rem 1.75rem;cursor:pointer;font-size:0.875rem;color:rgba(255,255,255,0.45);border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;transition:all 0.2s;font-family:'Inter',sans-serif}
+    .inv-auth-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem}
+    .inv-auth-tab{padding:0.9rem 1.75rem;cursor:pointer;font-size:0.875rem;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;transition:all 0.2s;font-family:'Inter',sans-serif}
     .inv-auth-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
     .inv-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
-    .inv-stat{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
+    .inv-stat{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
     .inv-stat .sv{font-size:1.6rem;font-weight:800;color:var(--gold)}
     .inv-stat .sl{font-size:0.72rem;color:var(--muted);margin-top:6px;font-weight:500}
     .inv-nav{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem}
@@ -1285,14 +1285,14 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
     .inv-panel.active{display:block}
     .inv-table{width:100%;border-collapse:collapse}
     .inv-table th{text-align:left;padding:0.75rem 1rem;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);border-bottom:0.5px solid var(--border);font-weight:600}
-    .inv-table td{padding:1rem;font-size:0.875rem;border-bottom:0.5px solid rgba(255,255,255,0.04)}
+    .inv-table td{padding:1rem;font-size:0.875rem;border-bottom:0.5px solid var(--border)}
     .inv-doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     .inv-doc{background:var(--dark);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:border-color 0.2s}
     .inv-doc:hover{border-color:rgba(200,151,58,0.4)}
     .inv-doc-icon{width:44px;height:44px;background:rgba(200,151,58,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
     .inv-doc-name{font-size:0.875rem;font-weight:600;margin-bottom:4px}
     .inv-doc-meta{font-size:0.72rem;color:var(--muted)}
-    .inv-engin{background:var(--dark);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+    .inv-engin{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
     .inv-engin-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
     .inv-engin-meta .mk{font-size:0.7rem;color:var(--muted);margin-bottom:3px}
     .inv-engin-meta .mv{font-size:0.95rem;font-weight:700}
@@ -1335,7 +1335,7 @@ nav{max-width:100%}
     }
   </style>
 
-  <div style="max-width:900px;margin-top:3rem;display:flex;flex-direction:column;align-items:center">
+  <div style="max-width:900px;margin:3rem auto 0;width:100%">
 
     <!-- NON CONNECTÉ -->
     <div id="inv-logged-out">
@@ -1349,11 +1349,11 @@ nav{max-width:100%}
         <div id="inv-login-form">
           <div style="margin-bottom:1.25rem">
             <label style="font-size:0.78rem;font-weight:600;color:var(--muted);display:block;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.08em" id="label-email">Email</label>
-            <input type="email" id="inv-email" placeholder="votre@email.com" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--text);padding:0.9rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+            <input type="email" id="inv-email" placeholder="votre@email.com" style="width:100%;background:#f5f2ec;border:1px solid var(--border);color:var(--text);padding:0.9rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
           </div>
           <div style="margin-bottom:1.5rem">
             <label style="font-size:0.78rem;font-weight:600;color:var(--muted);display:block;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.08em" id="label-pwd">Mot de passe</label>
-            <input type="password" id="inv-pwd" placeholder="••••••••" style="width:100%;background:var(--dark);border:1px solid var(--border);color:var(--text);padding:0.9rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+            <input type="password" id="inv-pwd" placeholder="••••••••" style="width:100%;background:#f5f2ec;border:1px solid var(--border);color:var(--text);padding:0.9rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;box-sizing:border-box" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
             <div style="text-align:right;margin-top:0.5rem"><a href="mailto:africarendement@gmail.com" style="font-size:0.8rem;color:var(--gold);text-decoration:none" id="forgot-pwd">Mot de passe oublié ?</a></div>
           </div>
           <button onclick="invLogin()" style="width:100%;background:var(--gold);color:var(--dark);padding:1rem;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;margin-bottom:1rem" id="connect-btn">Se connecter →</button>
