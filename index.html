@@ -731,16 +731,7 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
 
 
 <!-- BANNIERE ACCES INVESTISSEUR -->
-<section id="acces-investisseur-banner" style="background:var(--dark2);padding:5rem;text-align:center">
-  <div style="max-width:640px;margin:0 auto">
-    <div style="width:72px;height:72px;background:rgba(184,134,11,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.5rem">🔐</div>
-    <div style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:600">Espace investisseur</div>
-    <h2 id="acces-title" style="font-size:2.2rem;font-weight:800;margin-bottom:1rem;color:var(--text)">Accédez à nos <span style="color:var(--gold)">opportunités</span></h2>
-    <p id="acces-sub" style="color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:2rem">Les engins disponibles, le simulateur de rendement et les phases d'investissement sont réservés aux membres enregistrés. Créez un compte gratuit en 30 secondes.</p>
-    <button onclick="document.getElementById('espace-investisseur').scrollIntoView({behavior:'smooth'})" id="acces-btn" style="background:var(--gold);color:#fff;padding:1rem 2.5rem;border:none;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;border-radius:8px;display:inline-flex;align-items:center;gap:8px">Créer mon compte gratuit →</button>
-    <div style="margin-top:1rem;font-size:0.78rem;color:var(--muted)"><span id="acces-login">Déjà membre ?</span> <span style="color:var(--gold);cursor:pointer" onclick="document.getElementById('espace-investisseur').scrollIntoView({behavior:'smooth'})" id="tab-login">Se connecter</span></div>
-  </div>
-</section>
+
 
 <div id="inv-sections" style="display:none">
 <!-- ENGINS -->
@@ -1275,9 +1266,9 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
 
 <!-- ESPACE INVESTISSEUR -->
 <section style="background:var(--dark2)" id="espace-investisseur">
-  <div class="section-label">Espace investisseur</div>
-  <h2>Votre tableau de bord <span class="gold">personnel</span></h2>
-  <p class="section-sub">Suivez votre portefeuille, consultez vos versements et accédez à vos documents en temps réel.</p>
+  <div class="section-label" id="inv-section-label">Espace investisseur</div>
+  <h2 id="inv-section-title">Accédez à vos <span class="gold">opportunités</span></h2>
+  <p class="section-sub" id="inv-section-sub">Créez votre compte gratuit en 30 secondes ou connectez-vous pour accéder aux engins disponibles, au simulateur de rendement et à votre espace personnel.</p>
 
   <style>
     .inv-auth-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2rem}
@@ -1344,11 +1335,11 @@ nav{max-width:100%}
     }
   </style>
 
-  <div style="max-width:900px;margin-top:3rem">
+  <div style="max-width:900px;margin-top:3rem;display:flex;flex-direction:column;align-items:center">
 
     <!-- NON CONNECTÉ -->
     <div id="inv-logged-out">
-      <div style="background:var(--card);border:0.5px solid var(--border);border-radius:16px;padding:2rem;max-width:480px">
+      <div style="background:var(--card);border:0.5px solid var(--border);border-radius:16px;padding:2rem;max-width:520px;margin:0 auto">
         <div class="inv-auth-tabs">
           <div class="inv-auth-tab active" onclick="switchAuthTab('login',this)">Se connecter</div>
           <div class="inv-auth-tab" onclick="switchAuthTab('register',this)" id="tab-register">Créer un compte</div>
@@ -1562,7 +1553,7 @@ function switchAuthTab(tab, el) {
     document.getElementById('inv-logged-out').style.display = 'none';
     document.getElementById('inv-logged-in').style.display = 'block';
     document.getElementById('inv-sections').style.display = 'block';
-    document.getElementById('acces-investisseur-banner').style.display = 'none';
+    // banner removed
     sessionStorage.setItem('inv_user', name);
   }
   function invRegister() {
@@ -1595,7 +1586,7 @@ function switchAuthTab(tab, el) {
       document.getElementById('inv-logged-out').style.display = 'none';
       document.getElementById('inv-logged-in').style.display = 'block';
       document.getElementById('inv-sections').style.display = 'block';
-      document.getElementById('acces-investisseur-banner').style.display = 'none';
+      // banner removed
       sessionStorage.setItem('inv_user', prenom);
       sessionStorage.setItem('inv_email', email);
     }, 1500);
@@ -1604,7 +1595,7 @@ function switchAuthTab(tab, el) {
     document.getElementById('inv-logged-out').style.display = 'block';
     document.getElementById('inv-logged-in').style.display = 'none';
     document.getElementById('inv-sections').style.display = 'none';
-    document.getElementById('acces-investisseur-banner').style.display = 'block';
+    // banner removed
     sessionStorage.removeItem('inv_user');
   }
   var savedUser = sessionStorage.getItem('inv_user');
@@ -1613,7 +1604,7 @@ function switchAuthTab(tab, el) {
     document.getElementById('inv-logged-out').style.display = 'none';
     document.getElementById('inv-logged-in').style.display = 'block';
     document.getElementById('inv-sections').style.display = 'block';
-    document.getElementById('acces-investisseur-banner').style.display = 'none';
+    // banner removed
   }
   </script>
 
@@ -1842,6 +1833,9 @@ var T = {
     cc_c5: "Reporting mensuel et virement garanti",
     cc_cta: "Je veux confier mon camion →",
     cc_wa: "💬 Poser une question sur WhatsApp",
+        inv_section_label: "Espace investisseur",
+    inv_section_title: "Accédez à vos <span class='gold'>opportunités</span>",
+    inv_section_sub: "Créez votre compte gratuit en 30 secondes ou connectez-vous pour accéder aux engins disponibles et à votre espace personnel.",
     footer_rights: "© 2025 Africa Rendement. Tous droits réservés.",
     footer_risk: "Investir comporte des risques de perte en capital.",
     acces_title: "Accédez à nos <span style='color:var(--gold)'>opportunités</span>",
@@ -1904,6 +1898,9 @@ var T = {
     cc_c5: "Monthly reporting and guaranteed transfer",
     cc_cta: "I want to entrust my truck →",
     cc_wa: "💬 Ask a question on WhatsApp",
+        inv_section_label: "Investor space",
+    inv_section_title: "Access your <span class='gold'>opportunities</span>",
+    inv_section_sub: "Create your free account in 30 seconds or log in to access available assets and your personal dashboard.",
     footer_rights: "© 2025 Africa Rendement. All rights reserved.",
     footer_risk: "Investing carries risk of capital loss.",
     acces_title: "Access our <span style='color:var(--gold)'>opportunities</span>",
@@ -1966,6 +1963,9 @@ var T = {
     cc_c5: "تقرير شهري وتحويل مضمون",
     cc_cta: "أريد إسناد شاحنتي ←",
     cc_wa: "💬 اطرح سؤالًا على واتساب",
+        inv_section_label: "فضاء المستثمر",
+    inv_section_title: "ادخل إلى <span class='gold'>فرصك</span>",
+    inv_section_sub: "أنشئ حسابك المجاني في 30 ثانية أو سجّل دخولك للوصول إلى الآليات المتاحة ولوحتك الشخصية.",
     footer_rights: "© 2025 Africa Rendement. جميع الحقوق محفوظة.",
     footer_risk: "الاستثمار ينطوي على مخاطر فقدان رأس المال.",
     acces_title: "اكتشف <span style='color:var(--gold)'>فرصنا</span>",
@@ -2049,6 +2049,9 @@ var i18nMap = [
   { sel: '#cc-c5', key: 'cc_c5', html: false },
   { sel: '#cc-cta', key: 'cc_cta', html: false },
   { sel: '#cc-wa', key: 'cc_wa', html: false },
+  { sel: '#inv-section-label', key: 'inv_section_label', html: false },
+  { sel: '#inv-section-title', key: 'inv_section_title', html: true },
+  { sel: '#inv-section-sub', key: 'inv_section_sub', html: false },
   { sel: '#footer-rights', key: 'footer_rights', html: false },
   { sel: '#footer-risk', key: 'footer_risk', html: false },
   { sel: '#acces-title', key: 'acces_title', html: true },
