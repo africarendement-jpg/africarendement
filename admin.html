@@ -8,7 +8,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#fff;font-family:'Inter',sans-serif;min-height:100vh}
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* LOGIN */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center}
 .login-box{background:#141414;border:1px solid #222;border-radius:16px;padding:2.5rem;width:340px}
 .login-logo{text-align:center;font-size:1.3rem;font-weight:800;color:#C8973A;margin-bottom:0.5rem}
@@ -18,26 +20,73 @@ body{background:#0a0a0a;color:#fff;font-family:'Inter',sans-serif;min-height:100
 .btn-gold{width:100%;background:#C8973A;border:none;color:#000;padding:0.9rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer}
 .err{color:#EF4444;font-size:0.8rem;text-align:center;margin-top:0.5rem;display:none}
 
-/* Dashboard */
-.dash{display:none;padding:2rem;max-width:1000px;margin:0 auto}
-.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
-.dash-title{font-size:1.4rem;font-weight:800;color:#C8973A}
-.btn-out{background:#1a1a1a;border:1px solid #333;color:#888;padding:0.5rem 1rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.82rem}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+/* LAYOUT */
+.dash{display:none;min-height:100vh;display:none}
+.dash.active{display:flex}
+.sidebar{width:220px;background:#0f0f0f;border-right:1px solid #1a1a1a;padding:1.5rem 0;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar-logo{padding:0 1.5rem 1.5rem;font-size:1rem;font-weight:800;color:#C8973A;border-bottom:1px solid #1a1a1a;margin-bottom:1rem}
+.nav-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1.5rem;color:#888;cursor:pointer;font-size:0.875rem;transition:all 0.2s;border-left:3px solid transparent}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,0.03)}
+.nav-item.active{color:#C8973A;background:rgba(200,151,58,0.08);border-left-color:#C8973A}
+.nav-item .icon{font-size:1rem;width:20px;text-align:center}
+.main{flex:1;padding:2rem;overflow-y:auto;max-width:1100px}
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.page-title{font-size:1.4rem;font-weight:800;color:#fff}
+.header-actions{display:flex;gap:0.75rem;align-items:center}
+.btn-sm{background:#1a1a1a;border:1px solid #333;color:#888;padding:0.5rem 1rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.82rem}
+.btn-primary{background:#C8973A;border:none;color:#000;padding:0.5rem 1.2rem;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:700}
+.btn-danger{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#EF4444;padding:0.4rem 0.8rem;border-radius:6px;cursor:pointer;font-size:0.75rem}
+.btn-edit{background:rgba(200,151,58,0.12);border:1px solid rgba(200,151,58,0.25);color:#C8973A;padding:0.4rem 0.8rem;border-radius:6px;cursor:pointer;font-size:0.75rem}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
 .stat-card{background:#141414;border:1px solid #222;border-radius:12px;padding:1.25rem}
-.stat-val{font-size:2rem;font-weight:800;color:#C8973A}
+.stat-val{font-size:1.8rem;font-weight:800;color:#C8973A}
 .stat-val.green{color:#22C55E}
+.stat-val.blue{color:#3B82F6}
+.stat-val.purple{color:#A855F7}
 .stat-lbl{font-size:0.72rem;color:#555;margin-top:4px}
-.table-wrap{background:#141414;border:1px solid #222;border-radius:12px;overflow:hidden}
-.table-top{padding:1rem 1.5rem;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
-.table-top-title{font-weight:700}
-.btn-csv{background:#C8973A;border:none;color:#000;padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.78rem;font-weight:700}
+
+/* TABLE */
+.table-wrap{background:#141414;border:1px solid #222;border-radius:12px;overflow:hidden;margin-bottom:2rem}
+.table-header{padding:1rem 1.5rem;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.table-title{font-weight:700;font-size:0.95rem}
 table{width:100%;border-collapse:collapse}
-th{padding:0.75rem 1rem;text-align:left;font-size:0.7rem;color:#555;text-transform:uppercase;letter-spacing:0.1em;background:#0f0f0f}
-td{padding:0.9rem 1rem;font-size:0.875rem;border-bottom:1px solid #1a1a1a}
+th{padding:0.75rem 1rem;text-align:left;font-size:0.7rem;color:#555;text-transform:uppercase;letter-spacing:0.08em;background:#0f0f0f;white-space:nowrap}
+td{padding:0.85rem 1rem;font-size:0.875rem;border-bottom:1px solid #1a1a1a;vertical-align:middle}
 td a{color:#C8973A;text-decoration:none}
-.empty{padding:3rem;text-align:center;color:#444}
-.badge-new{background:rgba(34,197,94,0.15);color:#22C55E;font-size:0.7rem;padding:2px 8px;border-radius:100px;font-weight:600;margin-left:6px}
+.empty{padding:3rem;text-align:center;color:#444;font-size:0.875rem}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;padding:3px 10px;border-radius:100px;font-weight:600}
+.badge-new{background:rgba(34,197,94,0.12);color:#22C55E}
+.badge-active{background:rgba(34,197,94,0.12);color:#22C55E}
+.badge-inactive{background:rgba(107,114,128,0.15);color:#6B7280}
+.badge-maintenance{background:rgba(245,158,11,0.12);color:#F59E0B}
+.badge-accident{background:rgba(239,68,68,0.12);color:#EF4444}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:#141414;border:1px solid #222;border-radius:16px;padding:2rem;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-title{font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;color:#C8973A}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:0.78rem;color:#888;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.06em}
+.form-input{width:100%;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff;padding:0.75rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.875rem;outline:none}
+.form-input:focus{border-color:#C8973A}
+.form-select{width:100%;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff;padding:0.75rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.875rem;outline:none;cursor:pointer}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.modal-actions{display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.5rem}
+.btn-cancel{background:#1a1a1a;border:1px solid #333;color:#888;padding:0.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:0.875rem}
+.btn-save{background:#C8973A;border:none;color:#000;padding:0.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:0.875rem;font-weight:700}
+
+/* PAGE INACTIVE */
+.page{display:none}
+.page.active{display:block}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -55,61 +104,241 @@ td a{color:#C8973A;text-decoration:none}
 
 <!-- DASHBOARD -->
 <div class="dash" id="dash">
-  <div class="dash-header">
-    <div class="dash-title">🛠 Admin — Africa Rendement</div>
-    <div style="display:flex;gap:0.75rem;align-items:center">
-      <a href="https://africarendement.com" target="_blank" style="color:#555;font-size:0.82rem;text-decoration:none">← Retour au site</a>
-      <button class="btn-out" onclick="logout()">Se déconnecter</button>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">🌍 Africa Rendement</div>
+    <div class="nav-item active" onclick="showPage('inscrits',this)">
+      <span class="icon">👥</span> Inscrits
+    </div>
+    <div class="nav-item" onclick="showPage('camions',this)">
+      <span class="icon">🚛</span> Camions
+    </div>
+    <div class="nav-item" onclick="showPage('investisseurs',this)">
+      <span class="icon">💰</span> Investisseurs
+    </div>
+    <div style="margin-top:auto;padding:1.5rem">
+      <a href="https://africarendement.com" target="_blank" style="color:#444;font-size:0.78rem;display:block;margin-bottom:0.75rem">← Retour au site</a>
+      <button class="btn-sm" style="width:100%" onclick="logout()">Se déconnecter</button>
     </div>
   </div>
 
-  <div class="stats">
-    <div class="stat-card">
-      <div class="stat-val" id="s-total">0</div>
-      <div class="stat-lbl">Inscrits total</div>
+  <!-- Main -->
+  <div class="main">
+
+    <!-- PAGE INSCRITS -->
+    <div class="page active" id="page-inscrits">
+      <div class="page-header">
+        <div class="page-title">👥 Inscrits</div>
+        <div class="header-actions">
+          <button class="btn-primary" onclick="exportCSV()">📥 Exporter CSV</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-val" id="s-total">0</div><div class="stat-lbl">Total inscrits</div></div>
+        <div class="stat-card"><div class="stat-val green" id="s-today">0</div><div class="stat-lbl">Aujourd'hui</div></div>
+        <div class="stat-card"><div class="stat-val blue" id="s-week">0</div><div class="stat-lbl">Cette semaine</div></div>
+        <div class="stat-card"><div class="stat-val" id="s-last" style="font-size:0.95rem;padding-top:0.3rem">—</div><div class="stat-lbl">Dernier inscrit</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Liste des inscrits</div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Prénom</th><th>Nom</th><th>Email</th><th>Téléphone</th><th>Date</th>
+          </tr></thead>
+          <tbody id="tbody-inscrits">
+            <tr><td colspan="6" class="empty">Aucun inscrit pour le moment</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-val green" id="s-today">0</div>
-      <div class="stat-lbl">Inscrits aujourd'hui</div>
+
+    <!-- PAGE CAMIONS -->
+    <div class="page" id="page-camions">
+      <div class="page-header">
+        <div class="page-title">🚛 Gestion des camions</div>
+        <div class="header-actions">
+          <button class="btn-primary" onclick="openModalCamion()">+ Ajouter un camion</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-val" id="c-total">0</div><div class="stat-lbl">Total camions</div></div>
+        <div class="stat-card"><div class="stat-val green" id="c-actifs">0</div><div class="stat-lbl">En service</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#F59E0B" id="c-maintenance">0</div><div class="stat-lbl">En maintenance</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#EF4444" id="c-accidents">0</div><div class="stat-lbl">Accidents / Hors service</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Flotte</div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>Immat.</th><th>Marque / Modèle</th><th>Type</th><th>Année</th><th>Km</th><th>Statut</th><th>Corridor</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="tbody-camions">
+            <tr><td colspan="8" class="empty">Aucun camion enregistré — cliquez sur "+ Ajouter"</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-val" id="s-last" style="font-size:1rem;padding-top:0.4rem">—</div>
-      <div class="stat-lbl">Dernier inscrit</div>
+
+    <!-- PAGE INVESTISSEURS -->
+    <div class="page" id="page-investisseurs">
+      <div class="page-header">
+        <div class="page-title">💰 Investisseurs actifs</div>
+        <div class="header-actions">
+          <button class="btn-primary" onclick="openModalInvestisseur()">+ Ajouter un investisseur</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-val" id="i-total">0</div><div class="stat-lbl">Investisseurs</div></div>
+        <div class="stat-card"><div class="stat-val green" id="i-montant">0 €</div><div class="stat-lbl">Total investi</div></div>
+        <div class="stat-card"><div class="stat-val blue" id="i-versements">0 €</div><div class="stat-lbl">Versements bimestriels</div></div>
+        <div class="stat-card"><div class="stat-val purple" id="i-prochain">—</div><div class="stat-lbl">Prochain versement</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">Liste des investisseurs</div>
+          <button class="btn-primary" onclick="exportInvestisseurs()">📥 CSV</button>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Nom</th><th>Email</th><th>Montant</th><th>Part</th><th>Versement / 2 mois</th><th>Début</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="tbody-investisseurs">
+            <tr><td colspan="8" class="empty">Aucun investisseur actif</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL CAMION -->
+<div class="modal-overlay" id="modal-camion">
+  <div class="modal">
+    <div class="modal-title" id="modal-camion-title">🚛 Ajouter un camion</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Immatriculation *</label>
+        <input class="form-input" id="c-immat" placeholder="ex: BC3482">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Marque</label>
+        <select class="form-select" id="c-marque">
+          <option value="HOWO">HOWO</option>
+          <option value="Shacman">Shacman</option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Modèle</label>
+        <input class="form-input" id="c-modele" placeholder="ex: 6x4 371HP">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Type</label>
+        <select class="form-select" id="c-type">
+          <option value="Benne">Camion benne</option>
+          <option value="Semi">Semi-remorque</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Année</label>
+        <input class="form-input" id="c-annee" placeholder="ex: 2024" type="number">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kilométrage</label>
+        <input class="form-input" id="c-km" placeholder="ex: 30000" type="number">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Corridor</label>
+        <input class="form-input" id="c-corridor" placeholder="ex: Zencheng - Boffa">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Statut</label>
+        <select class="form-select" id="c-statut">
+          <option value="actif">En service</option>
+          <option value="maintenance">En maintenance</option>
+          <option value="accident">Accident / Hors service</option>
+          <option value="inactif">Inactif</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes</label>
+      <input class="form-input" id="c-notes" placeholder="Remarques, assurance, chauffeur...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-camion')">Annuler</button>
+      <button class="btn-save" onclick="saveCamion()">Enregistrer</button>
     </div>
   </div>
+</div>
 
-  <div class="table-wrap">
-    <div class="table-top">
-      <div class="table-top-title">Liste des inscrits</div>
-      <button class="btn-csv" onclick="exportCSV()">📥 Exporter CSV</button>
+<!-- MODAL INVESTISSEUR -->
+<div class="modal-overlay" id="modal-investisseur">
+  <div class="modal">
+    <div class="modal-title">💰 Ajouter un investisseur</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Prénom *</label>
+        <input class="form-input" id="inv-prenom" placeholder="Prénom">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nom *</label>
+        <input class="form-input" id="inv-nom" placeholder="Nom">
+      </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Prénom</th>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Téléphone</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <tr><td colspan="6" class="empty">Aucun inscrit pour le moment</td></tr>
-      </tbody>
-    </table>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input class="form-input" id="inv-email" placeholder="email@exemple.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Téléphone</label>
+        <input class="form-input" id="inv-tel" placeholder="+33 6 ...">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Montant investi (€) *</label>
+        <input class="form-input" id="inv-montant" placeholder="ex: 10000" type="number">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date de début</label>
+        <input class="form-input" id="inv-debut" type="date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Versement tous les 2 mois (€) — calculé auto</label>
+      <input class="form-input" id="inv-versement" placeholder="Calculé automatiquement" readonly style="color:#C8973A">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-investisseur')">Annuler</button>
+      <button class="btn-save" onclick="saveInvestisseur()">Enregistrer</button>
+    </div>
   </div>
 </div>
 
 <script>
 var CODE = 'AR2025admin';
+var editingCamionId = null;
 
+// ====== AUTH ======
 function login() {
   if(document.getElementById('pwd').value === CODE) {
     sessionStorage.setItem('admin_ok', '1');
     document.getElementById('login-wrap').style.display = 'none';
-    document.getElementById('dash').style.display = 'block';
-    loadData();
+    document.getElementById('dash').classList.add('active');
+    loadAll();
   } else {
     document.getElementById('err').style.display = 'block';
   }
@@ -117,31 +346,51 @@ function login() {
 
 function logout() {
   sessionStorage.removeItem('admin_ok');
-  document.getElementById('dash').style.display = 'none';
+  document.getElementById('dash').classList.remove('active');
   document.getElementById('login-wrap').style.display = 'flex';
   document.getElementById('pwd').value = '';
 }
 
-function loadData() {
+if(sessionStorage.getItem('admin_ok') === '1') {
+  document.getElementById('login-wrap').style.display = 'none';
+  document.getElementById('dash').classList.add('active');
+  setTimeout(loadAll, 100);
+}
+
+// ====== NAVIGATION ======
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  if(el) el.classList.add('active');
+}
+
+// ====== LOAD ALL ======
+function loadAll() {
+  loadInscrits();
+  loadCamions();
+  loadInvestisseurs();
+}
+
+// ====== INSCRITS ======
+function loadInscrits() {
   var users = JSON.parse(localStorage.getItem('ar_users') || '[]');
   document.getElementById('s-total').textContent = users.length;
   var today = new Date().toDateString();
-  var todayCount = users.filter(function(u){ return new Date(u.date).toDateString() === today; }).length;
-  document.getElementById('s-today').textContent = todayCount;
+  var week = new Date(); week.setDate(week.getDate() - 7);
+  document.getElementById('s-today').textContent = users.filter(function(u){ return new Date(u.date).toDateString() === today; }).length;
+  document.getElementById('s-week').textContent = users.filter(function(u){ return new Date(u.date) >= week; }).length;
   if(users.length > 0) {
     var last = users[users.length-1];
     document.getElementById('s-last').textContent = (last.prenom||'') + ' ' + (last.nom||'');
   }
-  var tbody = document.getElementById('tbody');
-  if(users.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty">Aucun inscrit pour le moment</td></tr>';
-    return;
-  }
+  var tbody = document.getElementById('tbody-inscrits');
+  if(!users.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty">Aucun inscrit</td></tr>'; return; }
   tbody.innerHTML = users.slice().reverse().map(function(u, i) {
     var isToday = new Date(u.date).toDateString() === today;
     return '<tr>' +
       '<td style="color:#555">' + (users.length - i) + '</td>' +
-      '<td style="font-weight:600">' + (u.prenom||'—') + (isToday ? '<span class="badge-new">Nouveau</span>' : '') + '</td>' +
+      '<td style="font-weight:600">' + (u.prenom||'—') + (isToday ? '<span class="badge badge-new" style="margin-left:6px">Nouveau</span>' : '') + '</td>' +
       '<td>' + (u.nom||'—') + '</td>' +
       '<td><a href="mailto:' + u.email + '">' + u.email + '</a></td>' +
       '<td style="color:#888">' + (u.tel||'—') + '</td>' +
@@ -153,22 +402,202 @@ function loadData() {
 function exportCSV() {
   var users = JSON.parse(localStorage.getItem('ar_users') || '[]');
   var csv = 'N°,Prénom,Nom,Email,Téléphone,Date\n';
-  users.forEach(function(u, i){
-    csv += [(i+1), u.prenom, u.nom, u.email, u.tel, new Date(u.date).toLocaleString('fr-FR')].join(',') + '\n';
+  users.forEach(function(u, i){ csv += [(i+1),u.prenom,u.nom,u.email,u.tel,new Date(u.date).toLocaleString('fr-FR')].join(',') + '\n'; });
+  downloadCSV(csv, 'inscrits-' + new Date().toISOString().slice(0,10) + '.csv');
+}
+
+// ====== CAMIONS ======
+function getCamions() { return JSON.parse(localStorage.getItem('ar_camions') || '[]'); }
+function saveCamions(data) { localStorage.setItem('ar_camions', JSON.stringify(data)); }
+
+function loadCamions() {
+  var camions = getCamions();
+  document.getElementById('c-total').textContent = camions.length;
+  document.getElementById('c-actifs').textContent = camions.filter(function(c){ return c.statut === 'actif'; }).length;
+  document.getElementById('c-maintenance').textContent = camions.filter(function(c){ return c.statut === 'maintenance'; }).length;
+  document.getElementById('c-accidents').textContent = camions.filter(function(c){ return c.statut === 'accident'; }).length;
+
+  var tbody = document.getElementById('tbody-camions');
+  if(!camions.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty">Aucun camion enregistré</td></tr>'; return; }
+
+  var statusMap = { actif: '<span class="badge badge-active">✓ En service</span>', maintenance: '<span class="badge badge-maintenance">⚙ Maintenance</span>', accident: '<span class="badge badge-accident">⚠ Accident</span>', inactif: '<span class="badge badge-inactive">Inactif</span>' };
+
+  tbody.innerHTML = camions.map(function(c, i) {
+    return '<tr>' +
+      '<td style="font-weight:700;color:#C8973A">' + (c.immat||'—') + '</td>' +
+      '<td>' + (c.marque||'') + ' ' + (c.modele||'') + '</td>' +
+      '<td style="color:#888">' + (c.type||'—') + '</td>' +
+      '<td style="color:#888">' + (c.annee||'—') + '</td>' +
+      '<td style="color:#888">' + (c.km ? parseInt(c.km).toLocaleString('fr-FR') + ' km' : '—') + '</td>' +
+      '<td>' + (statusMap[c.statut] || c.statut) + '</td>' +
+      '<td style="color:#888;font-size:0.8rem">' + (c.corridor||'—') + '</td>' +
+      '<td><button class="btn-edit" onclick="editCamion(' + i + ')">✏</button> <button class="btn-danger" onclick="deleteCamion(' + i + ')">✕</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function openModalCamion(editId) {
+  editingCamionId = editId !== undefined ? editId : null;
+  document.getElementById('modal-camion-title').textContent = editId !== undefined ? '✏ Modifier le camion' : '🚛 Ajouter un camion';
+  if(editId !== undefined) {
+    var c = getCamions()[editId];
+    document.getElementById('c-immat').value = c.immat || '';
+    document.getElementById('c-marque').value = c.marque || 'HOWO';
+    document.getElementById('c-modele').value = c.modele || '';
+    document.getElementById('c-type').value = c.type || 'Benne';
+    document.getElementById('c-annee').value = c.annee || '';
+    document.getElementById('c-km').value = c.km || '';
+    document.getElementById('c-corridor').value = c.corridor || '';
+    document.getElementById('c-statut').value = c.statut || 'actif';
+    document.getElementById('c-notes').value = c.notes || '';
+  } else {
+    ['c-immat','c-modele','c-annee','c-km','c-corridor','c-notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('c-marque').value = 'HOWO';
+    document.getElementById('c-type').value = 'Benne';
+    document.getElementById('c-statut').value = 'actif';
+  }
+  document.getElementById('modal-camion').classList.add('open');
+}
+
+function editCamion(i) { openModalCamion(i); }
+
+function deleteCamion(i) {
+  if(!confirm('Supprimer ce camion ?')) return;
+  var camions = getCamions();
+  camions.splice(i, 1);
+  saveCamions(camions);
+  loadCamions();
+}
+
+function saveCamion() {
+  var immat = document.getElementById('c-immat').value.trim();
+  if(!immat) { alert('Immatriculation obligatoire'); return; }
+  var camion = {
+    immat: immat,
+    marque: document.getElementById('c-marque').value,
+    modele: document.getElementById('c-modele').value,
+    type: document.getElementById('c-type').value,
+    annee: document.getElementById('c-annee').value,
+    km: document.getElementById('c-km').value,
+    corridor: document.getElementById('c-corridor').value,
+    statut: document.getElementById('c-statut').value,
+    notes: document.getElementById('c-notes').value,
+    date: new Date().toISOString()
+  };
+  var camions = getCamions();
+  if(editingCamionId !== null) { camions[editingCamionId] = camion; }
+  else { camions.push(camion); }
+  saveCamions(camions);
+  closeModal('modal-camion');
+  loadCamions();
+}
+
+// ====== INVESTISSEURS ======
+function getInvestisseurs() { return JSON.parse(localStorage.getItem('ar_investisseurs') || '[]'); }
+function saveInvestisseurs(data) { localStorage.setItem('ar_investisseurs', JSON.stringify(data)); }
+
+function loadInvestisseurs() {
+  var invs = getInvestisseurs();
+  var total = invs.reduce(function(s,i){ return s + (parseFloat(i.montant)||0); }, 0);
+  var versements = invs.reduce(function(s,i){ return s + (parseFloat(i.versement)||0); }, 0);
+  document.getElementById('i-total').textContent = invs.length;
+  document.getElementById('i-montant').textContent = total.toLocaleString('fr-FR') + ' €';
+  document.getElementById('i-versements').textContent = versements.toLocaleString('fr-FR') + ' €';
+
+  var tbody = document.getElementById('tbody-investisseurs');
+  if(!invs.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty">Aucun investisseur</td></tr>'; return; }
+  tbody.innerHTML = invs.map(function(inv, i) {
+    var part = inv.montant ? ((parseFloat(inv.montant)/75000)*100).toFixed(1) + '%' : '—';
+    return '<tr>' +
+      '<td style="color:#555">' + (i+1) + '</td>' +
+      '<td style="font-weight:600">' + (inv.prenom||'') + ' ' + (inv.nom||'') + '</td>' +
+      '<td><a href="mailto:' + inv.email + '">' + inv.email + '</a></td>' +
+      '<td style="color:#C8973A;font-weight:700">' + (parseFloat(inv.montant)||0).toLocaleString('fr-FR') + ' €</td>' +
+      '<td style="color:#888">' + part + '</td>' +
+      '<td style="color:#22C55E;font-weight:600">' + (parseFloat(inv.versement)||0).toLocaleString('fr-FR') + ' €</td>' +
+      '<td style="color:#555;font-size:0.8rem">' + (inv.debut ? new Date(inv.debut).toLocaleDateString('fr-FR') : '—') + '</td>' +
+      '<td><button class="btn-danger" onclick="deleteInvestisseur(' + i + ')">✕</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+document.getElementById('inv-montant') && document.getElementById('inv-montant').addEventListener('input', function() {
+  var m = parseFloat(this.value) || 0;
+  var v = Math.round((m / 75000) * 5000 * 2);
+  document.getElementById('inv-versement').value = v > 0 ? v.toLocaleString('fr-FR') + ' €' : '';
+});
+
+function openModalInvestisseur() {
+  ['inv-prenom','inv-nom','inv-email','inv-tel','inv-versement'].forEach(function(id){ document.getElementById(id).value = ''; });
+  document.getElementById('inv-montant').value = '';
+  document.getElementById('inv-debut').value = new Date().toISOString().slice(0,10);
+  document.getElementById('modal-investisseur').classList.add('open');
+}
+
+function saveInvestisseur() {
+  var prenom = document.getElementById('inv-prenom').value.trim();
+  var email = document.getElementById('inv-email').value.trim();
+  var montant = parseFloat(document.getElementById('inv-montant').value) || 0;
+  if(!prenom || !email || !montant) { alert('Prénom, email et montant obligatoires'); return; }
+  var versement = Math.round((montant / 75000) * 5000 * 2);
+  var invs = getInvestisseurs();
+  invs.push({
+    prenom: prenom, nom: document.getElementById('inv-nom').value,
+    email: email, tel: document.getElementById('inv-tel').value,
+    montant: montant, versement: versement,
+    debut: document.getElementById('inv-debut').value,
+    date: new Date().toISOString()
   });
+  saveInvestisseurs(invs);
+  closeModal('modal-investisseur');
+  loadInvestisseurs();
+}
+
+function deleteInvestisseur(i) {
+  if(!confirm('Supprimer cet investisseur ?')) return;
+  var invs = getInvestisseurs();
+  invs.splice(i, 1);
+  saveInvestisseurs(invs);
+  loadInvestisseurs();
+}
+
+function exportInvestisseurs() {
+  var invs = getInvestisseurs();
+  var csv = 'N°,Prénom,Nom,Email,Téléphone,Montant,Versement/2mois,Début\n';
+  invs.forEach(function(inv, i){
+    csv += [(i+1),inv.prenom,inv.nom,inv.email,inv.tel,inv.montant,inv.versement,inv.debut].join(',') + '\n';
+  });
+  downloadCSV(csv, 'investisseurs-' + new Date().toISOString().slice(0,10) + '.csv');
+}
+
+// ====== UTILS ======
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function downloadCSV(csv, filename) {
   var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'africa-rendement-inscrits-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.download = filename;
   a.click();
 }
 
-// Auto-login si session active
-if(sessionStorage.getItem('admin_ok') === '1') {
-  document.getElementById('login-wrap').style.display = 'none';
-  document.getElementById('dash').style.display = 'block';
-  loadData();
-}
+// Fermer modal en cliquant dehors
+document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+  overlay.addEventListener('click', function(e) {
+    if(e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// Calcul versement auto
+setTimeout(function() {
+  var montantInput = document.getElementById('inv-montant');
+  if(montantInput) {
+    montantInput.addEventListener('input', function() {
+      var m = parseFloat(this.value) || 0;
+      var v = Math.round((m / 75000) * 5000 * 2);
+      document.getElementById('inv-versement').value = v > 0 ? v.toLocaleString('fr-FR') + ' €' : '';
+    });
+  }
+}, 500);
 </script>
 </body>
 </html>
