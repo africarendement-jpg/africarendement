@@ -319,6 +319,46 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
 .cta-form-row{flex-direction:column}
 .footer-inner{flex-direction:column;text-align:center}
 }
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media(max-width:900px){
+  nav{padding:1rem 4%}
+  .hero{padding:6rem 4% 3rem}
+  .hero h1{font-size:2.2rem}
+  section{padding:3rem 4%}
+  .stats-band{grid-template-columns:repeat(2,1fr);padding:2rem 4%}
+  .engins-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .faq-tabs{overflow-x:auto;flex-wrap:nowrap}
+  .cta-final{padding:3rem 4%}
+  footer{padding:1.5rem 4%}
+}
+@media(max-width:600px){
+  nav{padding:0.75rem 4%}
+  .nav-links{display:none}
+  .hero{padding:5rem 4% 2.5rem}
+  .hero h1{font-size:1.8rem;line-height:1.2}
+  .hero-btns{flex-direction:column;gap:0.75rem}
+  .hero-btns button{width:100%}
+  section{padding:2.5rem 4%}
+  h2{font-size:1.6rem}
+  .stats-band{grid-template-columns:1fr 1fr;gap:1rem;padding:1.5rem 4%}
+  .stat-num{font-size:1.8rem}
+  .engins-grid{grid-template-columns:1fr}
+  .engin-card{padding:1.25rem}
+  .steps-grid{grid-template-columns:1fr}
+  .inv-stat-grid{grid-template-columns:repeat(2,1fr)}
+  .faq-tabs-wrap{overflow-x:auto}
+  .faq-tab{padding:0.75rem 1rem;font-size:0.8rem;white-space:nowrap}
+  .footer-grid{grid-template-columns:1fr}
+  .confier-grid{grid-template-columns:1fr!important}
+  .comparaison-grid{grid-template-columns:1fr!important}
+  .section-label{font-size:0.65rem}
+  .inv-auth-tabs{gap:0}
+  .inv-auth-tab{padding:0.75rem 1rem;font-size:0.8rem}
+  .cta-final{padding:2.5rem 4%}
+  .cta-final h2{font-size:1.6rem}
+}
 </style>
 </head>
 <body>
@@ -354,7 +394,7 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
     <p class="hero-sub" id="hero-sub">Participez au financement d'engins de transport minier en Guinée et percevez des revenus fixes tous les 2 mois. Contrat signé. Zéro gestion.</p>
     <div class="hero-btns">
       <button class="btn-gold" id="hero-btn1" onclick="document.getElementById('investir').scrollIntoView({behavior:'smooth'})">💬 Parler à un conseiller</button>
-      <button class="btn-outline" id="hero-btn2" onclick="document.getElementById('engins').scrollIntoView({behavior:'smooth'})">→ Voir nos opportunités</button>
+      <button class="btn-outline" id="hero-btn2" onclick="openRegister()">→ Voir nos opportunités</button>
     </div>
     <p class="hero-warning" id="hero-warning">*Investir comporte des risques de perte en capital</p>
   </div>
@@ -375,7 +415,7 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
 <section style="background:var(--dark2);padding:4rem 5rem;border-bottom:0.5px solid var(--border)">
   <div style="max-width:800px;margin:0 auto">
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+    <div class="comparaison-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
 
       <!-- Livret A -->
       <div style="background:var(--card);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem">
@@ -448,7 +488,7 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
   <h2 id="ar-h2">On fait quoi <span class="gold">concrètement ?</span></h2>
   <p class="section-sub" id="ar-sub">Pas de jargon. Voici exactement comment ça fonctionne.</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start">
+  <div class="confier-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start">
     <div>
       <div style="display:flex;flex-direction:column;gap:2rem">
         <div style="display:flex;gap:1.25rem;align-items:flex-start">
@@ -522,7 +562,7 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
   <h2 id="cc-h2">Vous avez un camion. <span class="gold">On s'occupe du reste.</span></h2>
   <p class="section-sub" id="cc-sub">Confiez votre engin à Africa Mining. On gère tout. Vous encaissez 5 500 € nets chaque mois pendant 4 ans — sans rien faire.</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start">
+  <div class="confier-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start">
 
     <!-- Gauche : comment ça marche -->
     <div>
@@ -1758,7 +1798,7 @@ var T = {
     nav_how: "Comment ça marche", nav_faq: "FAQ",
     nav_cta: "💬 Parler à un conseiller",
     hero_trust: "🌍 À partir de 5 000 € — Diaspora & investisseurs du monde entier",
-    hero_h1: "Investir en <span class='gold'>Afrique</span> n'a jamais été aussi <span class='gold'>simple.</span>",
+    hero_h1: "Rejoignez ceux qui font <span class='gold'>travailler leur argent</span> en Afrique.",
     hero_sub: "Participez au financement d'engins de transport minier en Guinée et percevez des revenus fixes tous les 2 mois. Contrat signé. Zéro gestion.",
     hero_btn1: "💬 Parler à un conseiller", hero_btn2: "→ Voir nos opportunités",
     hero_warning: "*Investir comporte des risques de perte en capital",
@@ -1882,7 +1922,7 @@ var T = {
     nav_how: "كيف يعمل", nav_faq: "الأسئلة الشائعة",
     nav_cta: "💬 تحدث مع مستشار",
     hero_trust: "🌍 ابتداءً من 5,000 € — المغتربون والمستثمرون من جميع أنحاء العالم",
-    hero_h1: "الاستثمار في <span class='gold'>أفريقيا</span> لم يكن بهذه <span class='gold'>البساطة من قبل.</span>",
+    hero_h1: "انضم إلى من يجعلون <span class='gold'>أموالهم تعمل</span> في أفريقيا.",
     hero_sub: "شارك في تمويل معدات النقل التعديني في غينيا واحصل على عوائد ثابتة كل شهرين. عقد موقّع. صفر إدارة.",
     hero_btn1: "💬 تحدث مع مستشار", hero_btn2: "← اكتشف فرصنا",
     hero_warning: "*الاستثمار ينطوي على مخاطر فقدان رأس المال",
