@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Africa Rendement</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:'Inter',sans-serif;min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-box{background:#141414;border:1px solid #222;border-radius:16px;padding:2.5rem;width:340px}
+.login-logo{text-align:center;font-size:1.3rem;font-weight:800;color:#C8973A;margin-bottom:0.5rem}
+.login-sub{text-align:center;font-size:0.8rem;color:#555;margin-bottom:2rem}
+.login-box input{width:100%;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff;padding:0.9rem 1rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;margin-bottom:1rem}
+.login-box input:focus{border-color:#C8973A}
+.btn-gold{width:100%;background:#C8973A;border:none;color:#000;padding:0.9rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer}
+.err{color:#EF4444;font-size:0.8rem;text-align:center;margin-top:0.5rem;display:none}
+
+/* Dashboard */
+.dash{display:none;padding:2rem;max-width:1000px;margin:0 auto}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.dash-title{font-size:1.4rem;font-weight:800;color:#C8973A}
+.btn-out{background:#1a1a1a;border:1px solid #333;color:#888;padding:0.5rem 1rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.82rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.stat-card{background:#141414;border:1px solid #222;border-radius:12px;padding:1.25rem}
+.stat-val{font-size:2rem;font-weight:800;color:#C8973A}
+.stat-val.green{color:#22C55E}
+.stat-lbl{font-size:0.72rem;color:#555;margin-top:4px}
+.table-wrap{background:#141414;border:1px solid #222;border-radius:12px;overflow:hidden}
+.table-top{padding:1rem 1.5rem;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.table-top-title{font-weight:700}
+.btn-csv{background:#C8973A;border:none;color:#000;padding:0.4rem 1rem;border-radius:6px;cursor:pointer;font-size:0.78rem;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{padding:0.75rem 1rem;text-align:left;font-size:0.7rem;color:#555;text-transform:uppercase;letter-spacing:0.1em;background:#0f0f0f}
+td{padding:0.9rem 1rem;font-size:0.875rem;border-bottom:1px solid #1a1a1a}
+td a{color:#C8973A;text-decoration:none}
+.empty{padding:3rem;text-align:center;color:#444}
+.badge-new{background:rgba(34,197,94,0.15);color:#22C55E;font-size:0.7rem;padding:2px 8px;border-radius:100px;font-weight:600;margin-left:6px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">🔐 Africa Rendement</div>
+    <div class="login-sub">Espace administrateur</div>
+    <input type="password" id="pwd" placeholder="Code administrateur" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn-gold" onclick="login()">Accéder →</button>
+    <div class="err" id="err">Code incorrect</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+  <div class="dash-header">
+    <div class="dash-title">🛠 Admin — Africa Rendement</div>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <a href="https://africarendement.com" target="_blank" style="color:#555;font-size:0.82rem;text-decoration:none">← Retour au site</a>
+      <button class="btn-out" onclick="logout()">Se déconnecter</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-val" id="s-total">0</div>
+      <div class="stat-lbl">Inscrits total</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val green" id="s-today">0</div>
+      <div class="stat-lbl">Inscrits aujourd'hui</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="s-last" style="font-size:1rem;padding-top:0.4rem">—</div>
+      <div class="stat-lbl">Dernier inscrit</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-top">
+      <div class="table-top-title">Liste des inscrits</div>
+      <button class="btn-csv" onclick="exportCSV()">📥 Exporter CSV</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr><td colspan="6" class="empty">Aucun inscrit pour le moment</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+var CODE = 'AR2025admin';
+
+function login() {
+  if(document.getElementById('pwd').value === CODE) {
+    sessionStorage.setItem('admin_ok', '1');
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('dash').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('admin_ok');
+  document.getElementById('dash').style.display = 'none';
+  document.getElementById('login-wrap').style.display = 'flex';
+  document.getElementById('pwd').value = '';
+}
+
+function loadData() {
+  var users = JSON.parse(localStorage.getItem('ar_users') || '[]');
+  document.getElementById('s-total').textContent = users.length;
+  var today = new Date().toDateString();
+  var todayCount = users.filter(function(u){ return new Date(u.date).toDateString() === today; }).length;
+  document.getElementById('s-today').textContent = todayCount;
+  if(users.length > 0) {
+    var last = users[users.length-1];
+    document.getElementById('s-last').textContent = (last.prenom||'') + ' ' + (last.nom||'');
+  }
+  var tbody = document.getElementById('tbody');
+  if(users.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="empty">Aucun inscrit pour le moment</td></tr>';
+    return;
+  }
+  tbody.innerHTML = users.slice().reverse().map(function(u, i) {
+    var isToday = new Date(u.date).toDateString() === today;
+    return '<tr>' +
+      '<td style="color:#555">' + (users.length - i) + '</td>' +
+      '<td style="font-weight:600">' + (u.prenom||'—') + (isToday ? '<span class="badge-new">Nouveau</span>' : '') + '</td>' +
+      '<td>' + (u.nom||'—') + '</td>' +
+      '<td><a href="mailto:' + u.email + '">' + u.email + '</a></td>' +
+      '<td style="color:#888">' + (u.tel||'—') + '</td>' +
+      '<td style="color:#555;font-size:0.8rem">' + new Date(u.date).toLocaleString('fr-FR') + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function exportCSV() {
+  var users = JSON.parse(localStorage.getItem('ar_users') || '[]');
+  var csv = 'N°,Prénom,Nom,Email,Téléphone,Date\n';
+  users.forEach(function(u, i){
+    csv += [(i+1), u.prenom, u.nom, u.email, u.tel, new Date(u.date).toLocaleString('fr-FR')].join(',') + '\n';
+  });
+  var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'africa-rendement-inscrits-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+// Auto-login si session active
+if(sessionStorage.getItem('admin_ok') === '1') {
+  document.getElementById('login-wrap').style.display = 'none';
+  document.getElementById('dash').style.display = 'block';
+  loadData();
+}
+</script>
+</body>
+</html>
