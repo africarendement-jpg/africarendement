@@ -369,7 +369,42 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
   .cta-final{padding:2.5rem 4%}
   .cta-final h2{font-size:1.6rem}
 }
+
+    .btn-rdv {
+      background: #B8860B;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .btn-rdv:hover {
+      background: #9a7009;
+    }
+    .btn-hero-rdv {
+      background: transparent;
+      color: #B8860B;
+      border: 2px solid #B8860B;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+      margin-left: 12px;
+    }
+    .btn-hero-rdv:hover {
+      background: #B8860B;
+      color: white;
+    }
 </style>
+
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 <body>
 
@@ -1012,11 +1047,11 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
     </div>
     <div class="sim-timeline">
       <div class="tl-title">Versements annuels sur 5 ans</div>
-      <div class="tl-row"><span>Année 1 — 6 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:20%"></div></div><span id="tl1" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
-      <div class="tl-row"><span>Année 2 — 6 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:40%"></div></div><span id="tl2" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
-      <div class="tl-row"><span>Année 3 — 6 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:60%"></div></div><span id="tl3" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
-      <div class="tl-row"><span>Année 4 — 6 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:80%"></div></div><span id="tl4" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
-      <div class="tl-row"><span>Année 5 — 6 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:100%"></div></div><span id="tl5" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
+      <div class="tl-row"><span>Année 1 — 4 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:20%"></div></div><span id="tl1" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
+      <div class="tl-row"><span>Année 2 — 4 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:40%"></div></div><span id="tl2" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
+      <div class="tl-row"><span>Année 3 — 4 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:60%"></div></div><span id="tl3" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
+      <div class="tl-row"><span>Année 4 — 4 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:80%"></div></div><span id="tl4" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
+      <div class="tl-row"><span>Année 5 — 4 versements</span><div class="tl-bar-wrap"><div class="tl-bar" style="width:100%"></div></div><span id="tl5" style="color:var(--gold);white-space:nowrap">2 667 €</span></div>
       <div class="tl-row tot"><span>TOTAL SUR 5 ANS</span><span id="tl-tot">13 333 €</span></div>
     </div>
     <button class="sim-cta" onclick="document.getElementById('investir').scrollIntoView({behavior:'smooth'})">Je veux investir ce montant →</button>
@@ -1217,13 +1252,44 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
     .faq-icon-tab.open{transform:rotate(45deg);background:rgba(200,151,58,0.12)}
     .faq-a-tab{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding-bottom 0.3s;color:var(--muted);font-size:0.875rem;line-height:1.85;font-family:'Inter',sans-serif}
     .faq-a-tab.open{max-height:400px;padding-bottom:1.5rem}
-  </style>
+  
+    .btn-rdv {
+      background: #B8860B;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .btn-rdv:hover {
+      background: #9a7009;
+    }
+    .btn-hero-rdv {
+      background: transparent;
+      color: #B8860B;
+      border: 2px solid #B8860B;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+      margin-left: 12px;
+    }
+    .btn-hero-rdv:hover {
+      background: #B8860B;
+      color: white;
+    }
+</style>
 
   <!-- ONGLET : NOUS -->
   <div id="faq-nous" class="faq-tab-content active" style="max-width:800px;margin-top:0">
     <div class="faq-item-tab">
       <div class="faq-q-tab" onclick="toggleFaqTab(this)">Qui est derrière Africa Rendement ?<span class="faq-icon-tab">+</span></div>
-      <div class="faq-a-tab">Africa Rendement a été fondée par deux amis d'origine guinéenne vivant en France. Nous avons grandi en Guinée et avons décidé de créer de l'emploi local tout en rendant accessible l'investissement minier à la diaspora africaine. Notre société opérationnelle MEM TRANS PORTS gère 12 engins sur les corridors miniers guinéens depuis 2023 avec un chiffre d'affaires de 4,68 millions d'euros.</div>
+      <div class="faq-a-tab">Africa Rendement a été fondée par Madiba Sylla, d'origine guinéenne, vivant en France. Après plus de 12 ans dans la logistique en Île-de-France, j'ai décidé de créer de l'emploi local en Guinée tout en rendant accessible l'investissement minier à la diaspora africaine. Notre société opérationnelle MEM TRANS PORTS gère 12 engins sur les corridors miniers guinéens depuis 2023 avec un chiffre d'affaires de 4,68 millions d'euros.</div>
     </div>
     <div class="faq-item-tab">
       <div class="faq-q-tab" onclick="toggleFaqTab(this)">Où êtes-vous basés ?<span class="faq-icon-tab">+</span></div>
@@ -1303,7 +1369,7 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
   <div id="faq-versements" class="faq-tab-content" style="max-width:800px;margin-top:0">
     <div class="faq-item-tab">
       <div class="faq-q-tab" onclick="toggleFaqTab(this)">Comment je reçois mon argent ?<span class="faq-icon-tab">+</span></div>
-      <div class="faq-a-tab">Par virement bancaire en euros sur votre compte personnel, tous les 2 moiss à date fixe. Vous recevez en même temps un relevé détaillé avec les revenus bruts, les charges déduites et le résultat net de la période.</div>
+      <div class="faq-a-tab">Par virement bancaire en euros sur votre compte personnel, tous les 2 mois à date fixe. Vous recevez en même temps un relevé détaillé avec les revenus bruts, les charges déduites et le résultat net de la période.</div>
     </div>
     <div class="faq-item-tab">
       <div class="faq-q-tab" onclick="toggleFaqTab(this)">À quelle fréquence les versements ont-ils lieu ?<span class="faq-icon-tab">+</span></div>
@@ -1624,7 +1690,38 @@ nav{max-width:100%}
       .inv-doc-grid{grid-template-columns:1fr}
       .inv-engin-meta{grid-template-columns:1fr 1fr}
     }
-  </style>
+  
+    .btn-rdv {
+      background: #B8860B;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .btn-rdv:hover {
+      background: #9a7009;
+    }
+    .btn-hero-rdv {
+      background: transparent;
+      color: #B8860B;
+      border: 2px solid #B8860B;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+      margin-left: 12px;
+    }
+    .btn-hero-rdv:hover {
+      background: #B8860B;
+      color: white;
+    }
+</style>
 
   <div style="max-width:900px;margin:3rem auto 0;width:100%">
 
