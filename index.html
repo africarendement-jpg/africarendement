@@ -3265,14 +3265,15 @@ if (heroEl) {
 <script>
 // Afficher la popup après 5 secondes si pas déjà vue
 function showPopup(){
-  if(!localStorage.getItem('ar_popup_seen')){
-    document.getElementById('ar-popup-overlay').classList.add('active');
+  const overlay = document.getElementById('ar-popup-overlay');
+  if(overlay && !sessionStorage.getItem('ar_popup_seen')){
+    overlay.classList.add('active');
   }
 }
 
 function closePopup(){
   document.getElementById('ar-popup-overlay').classList.remove('active');
-  localStorage.setItem('ar_popup_seen','1');
+  sessionStorage.setItem('ar_popup_seen','1');
 }
 
 function submitPopup(){
@@ -3291,13 +3292,13 @@ function submitPopup(){
   // Afficher le message de succès
   document.getElementById('ar-popup-content').style.display='none';
   document.getElementById('ar-popup-success').style.display='block';
-  localStorage.setItem('ar_popup_seen','1');
+  sessionStorage.setItem('ar_popup_seen','1');
   
   setTimeout(()=>closePopup(), 2500);
 }
 
 // Déclencher après 5 secondes
-setTimeout(showPopup, 5000);
+window.addEventListener('load', function(){ setTimeout(showPopup, 2000); });
 
 // Fermer en cliquant en dehors
 document.getElementById('ar-popup-overlay').addEventListener('click', function(e){
