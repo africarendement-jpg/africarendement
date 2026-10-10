@@ -3185,6 +3185,125 @@ if (heroEl) {
   }
 }
 </script>
+
+<!-- POPUP CAPTURE EMAIL -->
+<style>
+#ar-popup-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.75);z-index:99999;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.5s ease;pointer-events:none;
+  backdrop-filter:blur(4px);
+}
+#ar-popup-overlay.active{opacity:1;pointer-events:all}
+#ar-popup{
+  background:#1A2E20;border:1.5px solid #B8860B;border-radius:16px;
+  padding:2.5rem 2rem;max-width:460px;width:90%;position:relative;
+  transform:translateY(30px);transition:transform 0.5s ease;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);
+}
+#ar-popup-overlay.active #ar-popup{transform:translateY(0)}
+#ar-popup-close{
+  position:absolute;top:14px;right:18px;
+  color:#B8860B;font-size:1.4rem;cursor:pointer;
+  background:none;border:none;line-height:1;opacity:0.8;
+}
+#ar-popup-close:hover{opacity:1}
+#ar-popup h3{
+  color:#B8860B;font-size:1.4rem;font-weight:800;
+  margin-bottom:0.5rem;line-height:1.2;
+}
+#ar-popup p{
+  color:rgba(255,255,255,0.8);font-size:0.95rem;
+  margin-bottom:1.5rem;line-height:1.6;
+}
+#ar-popup-form{display:flex;flex-direction:column;gap:12px}
+#ar-popup-email{
+  width:100%;padding:14px 16px;border-radius:8px;
+  border:1px solid rgba(184,134,11,0.4);
+  background:rgba(255,255,255,0.07);color:#fff;
+  font-size:1rem;outline:none;box-sizing:border-box;
+}
+#ar-popup-email::placeholder{color:rgba(255,255,255,0.4)}
+#ar-popup-email:focus{border-color:#B8860B}
+#ar-popup-submit{
+  width:100%;padding:14px;border-radius:8px;
+  background:#B8860B;color:#fff;font-size:1rem;
+  font-weight:700;border:none;cursor:pointer;
+  transition:background 0.2s;
+}
+#ar-popup-submit:hover{background:#9a7009}
+#ar-popup-skip{
+  text-align:center;margin-top:12px;
+  color:rgba(255,255,255,0.4);font-size:0.8rem;
+  cursor:pointer;text-decoration:underline;
+}
+#ar-popup-success{
+  text-align:center;padding:1rem 0;display:none;
+}
+#ar-popup-success p{color:#B8860B;font-size:1.1rem;font-weight:700}
+</style>
+
+<div id="ar-popup-overlay">
+  <div id="ar-popup">
+    <button id="ar-popup-close" onclick="closePopup()">✕</button>
+    <div id="ar-popup-content">
+      <h3>🚛 Rejoignez nos investisseurs</h3>
+      <p>Recevez notre guide d'investissement et une simulation personnalisée — gratuitement.</p>
+      <div id="ar-popup-form">
+        <input type="email" id="ar-popup-email" placeholder="Votre adresse email" required>
+        <button id="ar-popup-submit" onclick="submitPopup()">Je veux investir →</button>
+      </div>
+      <p id="ar-popup-skip" onclick="closePopup()">Non merci, continuer sans m'inscrire</p>
+    </div>
+    <div id="ar-popup-success">
+      <p>✅ Merci ! Nous vous contacterons très prochainement.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Afficher la popup après 5 secondes si pas déjà vue
+function showPopup(){
+  if(!localStorage.getItem('ar_popup_seen')){
+    document.getElementById('ar-popup-overlay').classList.add('active');
+  }
+}
+
+function closePopup(){
+  document.getElementById('ar-popup-overlay').classList.remove('active');
+  localStorage.setItem('ar_popup_seen','1');
+}
+
+function submitPopup(){
+  const email = document.getElementById('ar-popup-email').value;
+  if(!email || !email.includes('@')){
+    document.getElementById('ar-popup-email').style.borderColor='#ef4444';
+    return;
+  }
+  
+  // Envoyer vers Brevo via iframe caché
+  const iframe = document.createElement('iframe');
+  iframe.style.display='none';
+  iframe.src='https://a62e0a44.sibforms.com/serve/MUIFAHTWaUaagLP6dQo6Fnq6aEsDTynUImOXG0gPPmiNZfAWEYo41Aum2kXzG5vDHWLiODIZPM1a3o18RtqPnMNpZV6KjSzNZZM-6gBKp8G23NTa1rx69p4-U4VqwSSatbI8VOmFZXgQ9TpTPddhRZ3riXhb4tlXf1wKzl2_vuehNbxtEeMU88nPUhzds9drB1X2JZDsr6xLmtL3-A==?EMAIL='+encodeURIComponent(email)+'&email_address_check=&locale=fr';
+  document.body.appendChild(iframe);
+  
+  // Afficher le message de succès
+  document.getElementById('ar-popup-content').style.display='none';
+  document.getElementById('ar-popup-success').style.display='block';
+  localStorage.setItem('ar_popup_seen','1');
+  
+  setTimeout(()=>closePopup(), 2500);
+}
+
+// Déclencher après 5 secondes
+setTimeout(showPopup, 5000);
+
+// Fermer en cliquant en dehors
+document.getElementById('ar-popup-overlay').addEventListener('click', function(e){
+  if(e.target === this) closePopup();
+});
+</script>
 </body></html><script>
 // COMPTEURS ANIMÉS
 function animCounter(el,target,suffix,dur){
