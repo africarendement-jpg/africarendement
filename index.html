@@ -405,6 +405,11 @@ nav,section,.stats-band,.cta-final,footer{padding-left:1.5rem;padding-right:1.5r
   <!-- Calendly -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <!-- GSAP + Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.9/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -2946,6 +2951,240 @@ function rejectCookies(){
 @keyframes truckDrive{0%{left:-200px}100%{left:110%}}
 </style>
 
+
+<script>
+// ============================================
+// LENIS — SCROLL ULTRA FLUIDE
+// ============================================
+const lenis = new Lenis({
+  duration: 1.4,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: false,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Connecter Lenis à ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(time => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// ============================================
+// GSAP — ANIMATIONS HERO
+// ============================================
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero title apparition lettre par lettre
+const heroTitle = document.querySelector('#hero-h1');
+if (heroTitle) {
+  const text = heroTitle.innerHTML;
+  gsap.from(heroTitle, {
+    opacity: 0,
+    y: 60,
+    duration: 1.2,
+    ease: 'power4.out',
+    delay: 0.3
+  });
+}
+
+// Hero sous-titre
+const heroSub = document.querySelector('.hero-sub, .hero-trust');
+if (heroSub) {
+  gsap.from(heroSub, {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    ease: 'power3.out',
+    delay: 0.7
+  });
+}
+
+// Boutons hero
+const heroBtns = document.querySelectorAll('.hero-cta, .btn-invest, .btn-primary');
+if (heroBtns.length) {
+  gsap.from(heroBtns, {
+    opacity: 0,
+    y: 20,
+    duration: 0.8,
+    ease: 'power3.out',
+    delay: 1.1,
+    stagger: 0.15
+  });
+}
+
+// ============================================
+// GSAP — COMPTEURS ANIMÉS
+// ============================================
+const statNums = document.querySelectorAll('.stat-num');
+if (statNums.length) {
+  const data = [
+    { el: statNums[0], target: 12, suffix: '' },
+    { el: statNums[1], target: 4.68, suffix: 'M€', decimals: 2 },
+    { el: statNums[2], target: 2023, suffix: '' },
+    { el: statNums[3], target: 5000, suffix: '€' },
+    { el: statNums[4], target: 23, suffix: '+' },
+  ];
+
+  data.forEach((d, i) => {
+    if (!d.el) return;
+    const obj = { val: 0 };
+    ScrollTrigger.create({
+      trigger: d.el,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        gsap.to(obj, {
+          val: d.target,
+          duration: 2.2,
+          delay: i * 0.12,
+          ease: 'power2.out',
+          onUpdate: () => {
+            if (d.suffix === 'M€') {
+              d.el.textContent = obj.val.toFixed(2) + 'M€';
+            } else if (d.suffix === '€') {
+              d.el.textContent = Math.floor(obj.val).toLocaleString('fr-FR') + ' €';
+            } else if (d.suffix === '+') {
+              d.el.textContent = Math.floor(obj.val) + '+';
+            } else {
+              d.el.textContent = Math.floor(obj.val);
+            }
+          }
+        });
+      }
+    });
+  });
+}
+
+// ============================================
+// GSAP — SCROLL REVEAL SECTIONS
+// ============================================
+const sections = document.querySelectorAll('section');
+sections.forEach(el => {
+  gsap.from(el, {
+    scrollTrigger: {
+      trigger: el,
+      start: 'top 88%',
+      toggleActions: 'play none none none',
+    },
+    opacity: 0,
+    y: 70,
+    duration: 1.0,
+    ease: 'power3.out',
+  });
+});
+
+// Cards avec stagger
+const cards = document.querySelectorAll('.card, .engin-card, .step');
+cards.forEach((card, i) => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: 'top 90%',
+      toggleActions: 'play none none none',
+    },
+    opacity: 0,
+    y: 50,
+    scale: 0.97,
+    duration: 0.8,
+    delay: (i % 3) * 0.12,
+    ease: 'power3.out',
+  });
+});
+
+// FAQ items
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach((item, i) => {
+  gsap.from(item, {
+    scrollTrigger: {
+      trigger: item,
+      start: 'top 92%',
+      toggleActions: 'play none none none',
+    },
+    opacity: 0,
+    x: -40,
+    duration: 0.7,
+    delay: i * 0.08,
+    ease: 'power2.out',
+  });
+});
+
+// ============================================
+// GSAP — PARALLAXE HERO VIDEO
+// ============================================
+const heroVideo = document.querySelector('#hero-video');
+if (heroVideo) {
+  gsap.to(heroVideo, {
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    },
+    scale: 1.15,
+    ease: 'none',
+  });
+}
+
+// ============================================
+// GSAP — HOVER CARDS MAGNÉTIQUE
+// ============================================
+document.querySelectorAll('.card, .engin-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
+    gsap.to(card, { rotateX: -y, rotateY: x, duration: 0.4, ease: 'power2.out', transformPerspective: 800 });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+  });
+});
+
+// ============================================
+// PARTICULES DORÉES CANVAS
+// ============================================
+const heroEl = document.querySelector('.hero');
+if (heroEl) {
+  const existing = heroEl.querySelector('canvas');
+  if (!existing) {
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.45;';
+    heroEl.insertBefore(canvas, heroEl.firstChild);
+    const ctx = canvas.getContext('2d');
+    const resize = () => { canvas.width = heroEl.offsetWidth; canvas.height = heroEl.offsetHeight; };
+    resize();
+    window.addEventListener('resize', resize);
+    const pts = Array.from({ length: 70 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2.2 + 0.4,
+      dx: (Math.random() - 0.5) * 0.45,
+      dy: (Math.random() - 0.5) * 0.45,
+      pulse: Math.random() * Math.PI * 2
+    }));
+    (function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pts.forEach(p => {
+        p.pulse += 0.018;
+        const a = 0.25 + 0.35 * Math.sin(p.pulse);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(184,134,11,${a})`;
+        ctx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(draw);
+    })();
+  }
+}
+</script>
 </body></html><script>
 // COMPTEURS ANIMÉS
 function animCounter(el,target,suffix,dur){
