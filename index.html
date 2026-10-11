@@ -3287,7 +3287,7 @@ function submitPopup(){
   btn.disabled = true;
   fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
-    headers: {'accept':'application/json','content-type':'application/json','api-key':'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'},
+    headers: {'accept':'application/json','content-type':'application/json','api-key':'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'},
     body: JSON.stringify({email: email, listIds: [2], updateEnabled: true})
   }).finally(() => {
     document.getElementById('ar-popup-content').style.display='none';
