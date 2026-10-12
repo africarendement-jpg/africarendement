@@ -3282,19 +3282,11 @@ function submitPopup(){
     document.getElementById('ar-popup-email').style.borderColor='#ef4444';
     return;
   }
-  const btn = document.getElementById('ar-popup-submit');
-  btn.textContent = 'Envoi...';
-  btn.disabled = true;
-  fetch('https://api.brevo.com/v3/contacts', {
-    method: 'POST',
-    headers: {'accept':'application/json','content-type':'application/json','api-key':'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'},
-    body: JSON.stringify({email: email, listIds: [2], updateEnabled: true})
-  }).finally(() => {
-    document.getElementById('ar-popup-content').style.display='none';
-    document.getElementById('ar-popup-success').style.display='block';
-    sessionStorage.setItem('ar_popup_seen','1');
-    setTimeout(()=>closePopup(), 2500);
-  });
+  sessionStorage.setItem('ar_popup_seen','1');
+  window.open('https://a62e0a44.sibforms.com/serve/MUIFAHTWaUaagLP6dQo6Fnq6aEsDTynUImOXG0gPPmiNZfAWEYo41Aum2kXzG5vDHWLiODIZPM1a3o18RtqPnMNpZV6KjSzNZZM-6gBKp8G23NTa1rx69p4-U4VqwSSatbI8VOmFZXgQ9TpTPddhRZ3riXhb4tlXf1wKzl2_vuehNbxtEeMU88nPUhzds9drB1X2JZDsr6xLmtL3-A==?EMAIL='+encodeURIComponent(email), '_blank');
+  document.getElementById('ar-popup-content').style.display='none';
+  document.getElementById('ar-popup-success').style.display='block';
+  setTimeout(()=>closePopup(), 2500);
 }
 
 // Déclencher après 5 secondes
